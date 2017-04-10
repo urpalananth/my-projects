@@ -2,7 +2,6 @@ package inst.an;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,8 +17,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import inst.an.websitetracker.UrlBean;
 import inst.an.websitetracker.WebsiteTrackerApplication;
+import inst.an.websitetracker.beans.UrlBean;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = WebsiteTrackerApplication.class)

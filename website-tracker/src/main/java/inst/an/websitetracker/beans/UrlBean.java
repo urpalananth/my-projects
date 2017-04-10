@@ -1,4 +1,4 @@
-package inst.an.websitetracker;
+package inst.an.websitetracker.beans;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

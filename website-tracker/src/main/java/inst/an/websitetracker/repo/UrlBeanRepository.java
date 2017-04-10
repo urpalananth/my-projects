@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import inst.an.websitetracker.UrlBean;
+import inst.an.websitetracker.beans.UrlBean;
 
 
 public interface UrlBeanRepository extends JpaRepository<UrlBean, Long>{

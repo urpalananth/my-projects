@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import inst.an.websitetracker.UrlBean;
+import inst.an.websitetracker.beans.UrlBean;
 import inst.an.websitetracker.repo.UrlBeanRepository;
 
 @Controller
