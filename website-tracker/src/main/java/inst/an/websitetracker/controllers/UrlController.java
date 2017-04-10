@@ -3,9 +3,11 @@ package inst.an.websitetracker.controllers;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
-
-import javax.annotation.PostConstruct;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -60,13 +62,43 @@ public class UrlController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/top3")
-	public @ResponseBody Collection<UrlBean> getTop3() {
+	public @ResponseBody List<Map<String, Object>> getTop3() {
 		System.out.println("request received ...");
-		return this.urlRepo.findTop3Visited();
+		
+		List<Object[]> top3 = this.urlRepo.findTop3Visited();
+		Map<String, Object> top3Map = null;
+		List<Map<String, Object>> top3List = new ArrayList<>();
+		
+		for (Object[] objects : top3) {
+			top3Map = new LinkedHashMap<>();
+			top3Map.put("domain", objects[0]);
+			top3Map.put("hits", objects[1]);
+			top3List.add(top3Map);
+		}
+		
+		return top3List;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody Collection<UrlBean> getAll() {
 		return this.urlRepo.findAll();
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/domainCounts")
+	public @ResponseBody List<Map<String, Object>> getDomainCounts() {
+		System.out.println("request received ...");
+		
+		List<Object[]> top3 = this.urlRepo.getDomainsAndCount();
+		Map<String, Object> top3Map = null;
+		List<Map<String, Object>> top3List = new ArrayList<>();
+		
+		for (Object[] objects : top3) {
+			top3Map = new LinkedHashMap<>();
+			top3Map.put("domain", objects[0]);
+			top3Map.put("hits", objects[1]);
+			top3List.add(top3Map);
+		}
+		
+		return top3List;
 	}
 }
