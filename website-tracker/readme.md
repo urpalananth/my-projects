@@ -9,7 +9,7 @@ a service that tracks referrers to a website and their counts by domain using pr
 
 git clone https://github.com/urpalananth/my-projects.git
 
-cd website-tracker
+cd <download location>my-projects/website-tracker
 
 In Eclipse
 - Import -> Existing Maven Projects 
