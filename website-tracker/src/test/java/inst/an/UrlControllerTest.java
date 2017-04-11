@@ -1,7 +1,9 @@
 package inst.an;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,6 +41,7 @@ public class UrlControllerTest {
 	              .webAppContextSetup(context)
 	              .build();
 	  }
+	  
 	  @Test
 	  public void testLogin() throws Exception{
 
@@ -68,7 +71,22 @@ public class UrlControllerTest {
 			
 			ResponseEntity<String> responseStr = testRestTemplate.withBasicAuth("ananth", "ananth").getForEntity(response.getHeaders().getLocation(), String.class);
 			
+			assertThat(responseStr.getStatusCode(), equalTo(HttpStatus.OK));
+			
 			System.out.println("--> "+responseStr.getBody());
 	  }
 	  
+	  @Test
+	  public void testGetTop3() throws Exception{
+
+			TestRestTemplate testRestTemplate = new TestRestTemplate();
+			UrlBean url = new UrlBean();
+			url.setUrl("https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html");
+			
+			ResponseEntity<UrlBean> response = testRestTemplate
+					.withBasicAuth("ananth", "ananth")
+					.postForEntity(BASE_URL+"/urls/top3", url, UrlBean.class);
+			
+			assertThat(response.getStatusCode(), equalTo(HttpStatus.CREATED));
+	  }	  
 }
