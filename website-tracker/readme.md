@@ -11,13 +11,21 @@ git clone https://github.com/urpalananth/my-projects.git
 
 cd <download location>my-projects/website-tracker
 
-In Eclipse
+#Build and run in Eclipse
 - Import -> Existing Maven Projects 
   - give the full for path to pom.xml ex: ~/Downloads/website-tracker/pom.xml
   
 - Open class -> inst.an.websitetracker.WebsiteTrackerApplication
   - Right Click -> Run As Java Application
   
+The application should be up and running on http://localhost:8080/
+
+#Build and run command line - 
+
+cd <download location>my-projects/website-tracker
+
+./mvnw spring-boot:run
+
 The application should be up and running on http://localhost:8080/
 
 #User Interface - 
