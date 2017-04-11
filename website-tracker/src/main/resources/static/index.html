@@ -41,7 +41,7 @@
 
 
 	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
+		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target="#myNavbar">
@@ -50,28 +50,11 @@
 				</button>
 				<a class="navbar-brand" href="/">WebsiteTracker</a>
 			</div>
-			<div class="collapse navbar-collapse" id="myNavbar">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="/">Home</a></li>
-					<li><a href="tweeter/all">Tweets</a></li>
-					<li><a href="users/following">Following</a></li>
-					<li><a href="users/followers">Followers</a></li>
-					<li><a href="users/all">Find</a></li>
-				</ul>
-
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/" class="dropdown-toggle" type="button"
-						id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="true"> <span class="glyphicon glyphicon-user"></span>
-							My Account<span class="caret"></span></a>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-							<li><a href="#">Settings</a></li>
-							<!-- 			            <li><a href="#">Privacy</a></li> -->
-							<li role="separator" class="divider"></li>
-							<li><a href="logout">Logout</a></li>
-						</ul></li>
-				</ul>
-			</div>
+			<ul class="nav navbar-nav navbar-right">
+        		<li><a href="#">Ananth</a></li>
+        		<li role="separator" class="divider"></li>
+        		<li><a href="#">Logout</a></li>
+        	</ul>
 		</div>
 	</nav>
 
@@ -90,19 +73,15 @@
 			<div class="row">
 				<div class="panel panel-default">
 					<div class="panel-heading">Top 3 Most Visited Domains</div>
-
-					<!-- Table -->
 					<table class="table">
 						<tr>
 							<th>Domain Name
 							<th># of hits
 						</tr>
-
 						<tr ng-repeat="url in urls">
 							<td align="left">{{url.domain}}
 							<td align="left">{{url.hits}}
 						</tr>
-
 					</table>
 				</div>
 			</div>
