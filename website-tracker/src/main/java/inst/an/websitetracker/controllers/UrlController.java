@@ -44,7 +44,30 @@ public class UrlController {
 			return ResponseEntity.badRequest().build();
 		}
 		
-		input.setDomain(url.getHost());
+		String domain = url.getHost();
+		
+		String [] parts = domain.split("\\.");
+		
+		int numberOfParts = 2;
+		
+		String newDomain = "";
+		
+		for (int i = parts.length-1; i >= 0 && numberOfParts > 0; i--) {
+			numberOfParts--;
+			newDomain += parts[i];
+			if(numberOfParts != 0)
+				newDomain += ".";
+		}
+		
+//		System.out.println("last index - " + domain.lastIndexOf("."));
+//		
+//		System.out.println("2nd from last - "+domain.lastIndexOf(".", domain.lastIndexOf(".", domain.lastIndexOf(".")-1)-1));
+//		
+//		domain = domain.substring(domain.lastIndexOf(".", domain.lastIndexOf(".", domain.lastIndexOf(".")-1)-1)+1);
+//		
+//		System.out.println("just domain & top level domain - "+domain);
+		
+		input.setDomain(newDomain);
 		
 		System.out.println("create request received ...");
 		UrlBean result = urlRepo.save(input);
