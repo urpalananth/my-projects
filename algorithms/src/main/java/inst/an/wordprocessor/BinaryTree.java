@@ -1,4 +1,4 @@
-package com.intuit.wordprocessor;
+package inst.an.wordprocessor;
 
 public class BinaryTree {
 	private Node root;
