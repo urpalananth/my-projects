@@ -10,22 +10,21 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Album {
-	private long userId;
+	private Long userId;
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String title;
-	@OneToMany(cascade = CascadeType.ALL, 
-    mappedBy = "album", orphanRemoval = true)
-	@JsonBackReference
-//	@NotFound(action = NotFoundAction.IGNORE)
+	@OneToMany(mappedBy = "album", cascade=CascadeType.ALL)
+	@JsonManagedReference
 	private Set<Photo> photos;
 
 	public Album() {
 	}
-	public Album(long userId, long id, String title, Set<Photo> photos) {
+	public Album(Long userId, Long id, String title, Set<Photo> photos) {
 		super();
 		this.userId = userId;
 		this.id = id;
@@ -35,13 +34,13 @@ public class Album {
 	public long getUserId() {
 		return userId;
 	}
-	public void setUserId(long userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getTitle() {

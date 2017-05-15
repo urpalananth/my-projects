@@ -44,22 +44,45 @@ public class InitController {
 		enableSSL();
 		RestTemplate restTemplate = new RestTemplate();
 		
-		ResponseEntity<AlbumData[]> response = restTemplate.getForEntity(BASE_URL+"albums", AlbumData[].class);
-		ResponseEntity<PhotoData[]> response2 = restTemplate.getForEntity(BASE_URL+"photos", PhotoData[].class);
-		
-		List<AlbumData> albumList = Arrays.asList(response.getBody());
-		List<PhotoData> photoList = Arrays.asList(response2.getBody());
-		
-		System.out.println("--> "+albumList.size());
-		System.out.println("--> "+photoList.size());
+		try {
+			ResponseEntity<AlbumData[]> response = restTemplate.getForEntity(BASE_URL + "albums", AlbumData[].class);
+			ResponseEntity<PhotoData[]> response2 = restTemplate.getForEntity(BASE_URL + "photos", PhotoData[].class);
 
-		List<Album> aList = albumList.stream()
-				 .map(a -> new Album(a.getUserId(), a.getId(), a.getTitle(), photoList.stream()
-																	.filter(b -> b.getAlbumId() == a.getId())
-																	.map(c -> new Photo())
-																	.collect(Collectors.toSet())))
-				 .collect(Collectors.toList());
-		albumRepo.save(aList);
+			List<AlbumData> albumList = Arrays.asList(response.getBody());
+			List<PhotoData> photoList = Arrays.asList(response2.getBody());
+
+			System.out.println("--> " + albumList.size());
+			System.out.println("--> " + photoList.size());
+
+			List<Album> aList = albumList
+					.stream().map(
+							a -> new Album(a.getUserId(), a.getId(),
+									a.getTitle(), null))
+					.collect(Collectors.toList());
+			
+			aList = albumRepo.save(aList);
+			
+			List<Photo> pList = photoList.stream()
+									.map(c -> new Photo(c.getId(), c.getTitle(), c.getUrl(), c.getThumbnailUrl(), 
+											this.albumRepo.findOne(c.getAlbumId())))
+									.collect(Collectors.toList());
+					
+			this.photoRepo.save(pList);
+			/*aList.forEach(a -> a.setPhotos(photoList.stream()
+													.filter(b -> b.getAlbumId().equals(a.getId()))
+													.map(c -> new Photo(c.getId(), c.getTitle(), c.getUrl(), c.getThumbnailUrl(), a))
+													.collect(Collectors.toSet())));
+			List<Album> aList = albumList
+					.stream().map(
+							a -> new Album(a.getUserId(), a.getId(),
+									a.getTitle(), photoList.stream().filter(b -> b.getAlbumId() == a.getId())
+											.map(c -> new Photo(c.getId(), c.getTitle(), c.getUrl(), c.getThumbnailUrl(), null)).collect(Collectors.toSet())))
+					.collect(Collectors.toList());*/
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(500).build();
+		}
 		
 		System.out.println("--> "+albumRepo.count());
 		System.out.println("--> "+photoRepo.count());

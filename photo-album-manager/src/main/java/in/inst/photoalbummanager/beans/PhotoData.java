@@ -1,22 +1,22 @@
 package in.inst.photoalbummanager.beans;
 
 public class PhotoData {
-	private long albumId;
-	private long id;
+	private Long albumId;
+	private Long id;
 	private String title;
 	private String url;
 	private String thumbnailUrl;
 	
-	public long getAlbumId() {
+	public Long getAlbumId() {
 		return albumId;
 	}
-	public void setAlbumId(long albumId) {
+	public void setAlbumId(Long albumId) {
 		this.albumId = albumId;
 	}
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getTitle() {

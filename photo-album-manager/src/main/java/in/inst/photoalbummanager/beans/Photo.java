@@ -6,23 +6,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Photo {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String title;
 	private String url;
 	private String thumbnailUrl;
 	@ManyToOne
-	@JsonBackReference
+	//@JsonManagedReference
 	private Album album;
 	
 	public Photo() {
 	}
 	
-	public Photo(long id, String title, String url, String thumbnailUrl, Album album) {
+	public Photo(Long id, String title, String url, String thumbnailUrl, Album album) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -31,10 +31,10 @@ public class Photo {
 		this.album = album;
 	}
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getTitle() {
