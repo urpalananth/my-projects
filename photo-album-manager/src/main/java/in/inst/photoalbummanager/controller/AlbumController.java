@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -62,9 +63,11 @@ public class AlbumController {
 			this.albumRepo.delete(id);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResponseEntity.status(500).build();
+			if(e instanceof DataIntegrityViolationException)
+				return ResponseEntity.status(500).body("Album with id - "+id+" has photos, cannot be deleted!");
+			return ResponseEntity.status(500).body("Error deleting the album: "+e.getMessage());
 		}
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.ok("Album deleted successfully!");
 	}
 	
 	@RequestMapping(path="/all", method = RequestMethod.GET)

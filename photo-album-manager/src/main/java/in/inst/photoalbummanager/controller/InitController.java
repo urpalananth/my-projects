@@ -57,7 +57,7 @@ public class InitController {
 			List<Album> aList = albumList
 					.stream().map(
 							a -> new Album(a.getUserId(), a.getId(),
-									a.getTitle(), null))
+									a.getTitle()))
 					.collect(Collectors.toList());
 			
 			aList = albumRepo.save(aList);
@@ -81,12 +81,12 @@ public class InitController {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResponseEntity.status(500).build();
+			return ResponseEntity.status(500).body("Error while initializing: "+e.getCause());
 		}
 		
 		System.out.println("--> "+albumRepo.count());
 		System.out.println("--> "+photoRepo.count());
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.ok("Photo Album Manager data initialized !!");
 	}
 	
     private void enableSSL() {

@@ -18,7 +18,7 @@ import in.inst.photoalbummanager.repo.UserRepository;
 @Transactional
 public class PAMUserDetailsService implements UserDetailsService {
 
-    private static final Logger LOGGER = Logger.getLogger("SSUserDetailsService");
+    private static final Logger LOGGER = Logger.getLogger("PAMUserDetailsService");
 
     private UserRepository userRepository;
 
@@ -34,7 +34,7 @@ public class PAMUserDetailsService implements UserDetailsService {
                 System.out.println("user not found with the provided username");
                 return null;
             }
-            LOGGER.info(" user from username " + user.toString());
+            LOGGER.info("User from username " + user.toString());
             return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), getAuthorities(user));
         }
         catch (Exception e){

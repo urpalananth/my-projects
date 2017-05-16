@@ -1,17 +1,23 @@
 package in.inst.photoalbummanager.controller;
 
-import java.util.List;
+import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import in.inst.photoalbummanager.beans.Album;
 import in.inst.photoalbummanager.beans.Photo;
 import in.inst.photoalbummanager.repo.AlbumRepository;
 import in.inst.photoalbummanager.repo.PhotoRepository;
+import in.inst.photoalbummanager.repo.UserRepository;
 
 @RestController
 @RequestMapping("/{albumId}/photos")
@@ -19,32 +25,81 @@ public class PhotoContoller {
 	
 	private PhotoRepository photoRepo;
 	private AlbumRepository albumRepo;
+	private UserRepository userRepo;
 	@Autowired
-	public PhotoContoller(PhotoRepository photoRepo, AlbumRepository albumRepo) {
+	public PhotoContoller(PhotoRepository photoRepo, AlbumRepository albumRepo, UserRepository userRepo) {
 		
 		this.photoRepo = photoRepo;
 		this.albumRepo = albumRepo;
+		this.userRepo = userRepo;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Photo> read(@PathVariable long albumId) {
-		System.out.println("--> "+this.albumRepo.findById(albumId).getPhotos().size());
-		System.out.println("--> "+this.photoRepo.findByAlbum(this.albumRepo.findOne(albumId)));
-		return this.photoRepo.findByAlbum(this.albumRepo.findOne(albumId));
+	public ResponseEntity<?> read(@PathVariable long albumId) {
+		Album album = this.albumRepo.findOne(albumId);
+		if(album == null)
+			return ResponseEntity.badRequest().body("Album not found!");
+		if(!validate(album))
+			return ResponseEntity.status(403).body("Forbidden access to this album!");
+		return ResponseEntity.ok(this.photoRepo.findByAlbum(album));
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> create() {
-		return null;
+	public ResponseEntity<?> create(@PathVariable long albumId, @RequestBody Photo input) {
+		Album album = this.albumRepo.findOne(albumId);
+		if(album == null)
+			return ResponseEntity.badRequest().body("Album not found!");
+		if(!validate(album))
+			return ResponseEntity.status(403).body("Forbidden access to this album!");
+		input.setAlbum(album);
+		Photo result = this.photoRepo.save(input);
+		URI location = ServletUriComponentsBuilder
+				.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(result.getId()).toUri();
+		return ResponseEntity.created(location).body(result);
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT)
-	public ResponseEntity<?> udpate() {
-		return null;
+	@RequestMapping(path="{photoId}", method = RequestMethod.PUT)
+	public ResponseEntity<?> udpate(@PathVariable long albumId, @PathVariable long photoId, @RequestBody Photo input) {
+		Album album = this.albumRepo.findOne(albumId);
+		if(album == null)
+			return ResponseEntity.badRequest().body("Album not found!");
+		if(!validate(album))
+			return ResponseEntity.status(403).body("Forbidden access to this album!");
+		input.setId(photoId);
+		input.setAlbum(album);
+		Photo result = null;
+		try {
+			result = this.photoRepo.save(input);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(500).body("Error updating photot: "+e.getMessage());
+		}
+		
+		return ResponseEntity.ok().body(result);
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE)
-	public ResponseEntity<?> delete() {
-		return null;
+	public ResponseEntity<?> delete(@PathVariable long albumId, @PathVariable long photoId) {
+		Album album = this.albumRepo.findOne(albumId);
+		if(album == null)
+			return ResponseEntity.badRequest().body("Album not found!");
+		if(!validate(album))
+			return ResponseEntity.status(403).body("Forbidden access to this album!");
+		try {
+			this.photoRepo.delete(photoId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(500).body("Error deleting photo: "+e.getMessage());
+		}
+		return ResponseEntity.ok("Photo deleted successfully!");
+	}
+	
+	/**
+	 * 
+	 */
+	private boolean validate(Album album) {
+		String username = ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+		return album.getUserId().equals(this.userRepo.findByName(username).getId());
 	}
 }

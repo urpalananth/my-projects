@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -18,20 +17,19 @@ public class Album {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String title;
-	@OneToMany(mappedBy = "album", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "album")
 	@JsonManagedReference
 	private Set<Photo> photos;
 
 	public Album() {
 	}
-	public Album(Long userId, Long id, String title, Set<Photo> photos) {
+	public Album(Long userId, Long id, String title) {
 		super();
 		this.userId = userId;
 		this.id = id;
 		this.title = title;
-		this.photos = photos;
 	}
-	public long getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 	public void setUserId(Long userId) {
