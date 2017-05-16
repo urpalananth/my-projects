@@ -15,6 +15,7 @@ The REST API should support the following functionality:
 	The following constraint should be implemented:
 		- Albums cannot be deleted if any associated photos exist.
 	Albums and photos should have the following attributes
+
 |Albums|
 |----|
 |id |
