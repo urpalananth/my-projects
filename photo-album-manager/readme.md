@@ -50,6 +50,7 @@ credentials to login - any of the below
 |http://localhost:8080/all		|(for admin to get all the albums)|
 
 **Technologies Used**
+- Spring boot, Spring devtools.
 - Authentication is Done by Spring Security.
 - Controllers – Using Spring Data Rest.
 - JPA – Hibernate JPA implementation wrapped with Spring.
