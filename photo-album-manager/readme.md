@@ -51,7 +51,7 @@ credentials to login - any of the below
 
 **Technologies Used**
 - Spring boot, Spring devtools.
-- Authentication is Done by Spring Security.
+- Authentication and Authorization is Done with Spring Security.
 - Controllers – Using Spring Data Rest.
 - JPA – Hibernate JPA implementation wrapped with Spring.
 - Database – H2 in memory database.
