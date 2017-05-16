@@ -1,3 +1,7 @@
+**Problem Stateemnt**
+
+Problem statement can be found here - https://github.com/urpalananth/my-projects/blob/master/photo-album-manager/problem-stmt.md
+
 **Setup**
 
 git clone https://github.com/urpalananth/my-projects.git
