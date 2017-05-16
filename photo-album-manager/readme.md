@@ -47,5 +47,11 @@ credentials to login - any of the below
 |http://localhost:8080/photos	|(with methods GET, POST, PUT, DELETE)|
 |http://localhost:8080/init		|(to initialize data)|
 |http://localhost:8080/all		|(for admin to get all the albums)|
+|http://localhost:8080/all		|(for admin to get all the albums)|
 
-
+**Technologies Used**
+- Authentication is Done by Spring Security.
+- Controllers – Using Spring Data Rest.
+- JPA – Hibernate JPA implementation wrapped with Spring.
+- Database – H2 in memory database.
+- Testing – Integration Tests with live rest service.
