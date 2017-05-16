@@ -6,7 +6,7 @@ cd <download location>my-projects/photo-album-manager
 
 #Build and run in Eclipse
 - Import -> Existing Maven Projects 
-  - give the full for path to pom.xml ex: ~/Downloads/photo-album-manager/pom.xml
+  - give the full for path to pom.xml ex: <download location>/my-projects/photo-album-manager/pom.xml
   
 - Open class -> inst.an.photoalbummanager.PhotoAlbumManagerApplication
   - Right Click -> Run As Java Application
