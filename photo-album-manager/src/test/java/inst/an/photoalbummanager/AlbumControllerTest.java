@@ -3,6 +3,8 @@ package inst.an.photoalbummanager;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
+import java.util.logging.Logger;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +25,7 @@ import inst.an.photoalbummanager.beans.Album;
 @WebAppConfiguration
 
 public class AlbumControllerTest {
-	  
+		private static final Logger LOGGER = Logger.getLogger("PAMUserDetailsService");	  
 	  private static final String BASE_URL = "http://localhost:8080";
 	  
 	  @Test
@@ -61,12 +63,10 @@ public class AlbumControllerTest {
 			assertThat(responseStr.getStatusCode(), equalTo(HttpStatus.OK));
 
 			assertThat("ananth's 1", equalTo(responseStr.getBody().getTitle()));
-			System.out.println("--> "+responseStr.getBody().getTitle());
 	  }
 	  
 	  @Test
 	  public void testDeleteAlbum() throws Exception{
-		  System.out.println("== testDeleteAlbum ==");
 		  RestTemplate restTemplate = new RestTemplate();
 		  restTemplate.getInterceptors().add(
 				  new BasicAuthorizationInterceptor("ab", "ab"));
@@ -80,7 +80,7 @@ public class AlbumControllerTest {
 		assertThat(response.getStatusCode(), equalTo(HttpStatus.CREATED));
 		// Get and see if the album is created
 		String newAlbumPath = response.getHeaders().getLocation().toString();
-		System.out.println("newAlbumPath : " + newAlbumPath);
+		LOGGER.info("newAlbumPath : " + newAlbumPath);
 		ResponseEntity<?> response1 = restTemplate.getForEntity(newAlbumPath, Album.class);
 
 		assertThat(response1.getStatusCode(), equalTo(HttpStatus.OK));

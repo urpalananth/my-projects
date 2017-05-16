@@ -2,6 +2,7 @@ package inst.an.photoalbummanager.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -22,7 +23,7 @@ import inst.an.photoalbummanager.repo.UserRepository;
 @RestController
 @RequestMapping("/albums")
 public class AlbumController {
-	
+	private static final Logger LOGGER = Logger.getLogger("PAMUserDetailsService");
 	private AlbumRepository albumRepo;
 	private UserRepository userRepo;
 	
@@ -76,7 +77,6 @@ public class AlbumController {
 	
 	@RequestMapping(path="/{id:[0-9]+}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> delete(@PathVariable Long id) {
-		System.out.println("delete --> "+id);
 		Album album = this.albumRepo.findOne(id);
 		if(album == null)
 			return ResponseEntity.notFound().build();

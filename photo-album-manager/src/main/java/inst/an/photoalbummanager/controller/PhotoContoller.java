@@ -1,6 +1,7 @@
 package inst.an.photoalbummanager.controller;
 
 import java.net.URI;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ import inst.an.photoalbummanager.repo.UserRepository;
 @RestController
 @RequestMapping("/{albumId}/photos")
 public class PhotoContoller {
-	
+	private static final Logger LOGGER = Logger.getLogger("PAMUserDetailsService");
 	private PhotoRepository photoRepo;
 	private AlbumRepository albumRepo;
 	private UserRepository userRepo;
