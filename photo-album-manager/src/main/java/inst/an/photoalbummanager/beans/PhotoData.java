@@ -1,4 +1,4 @@
-package in.inst.photoalbummanager.beans;
+package inst.an.photoalbummanager.beans;
 
 public class PhotoData {
 	private Long albumId;

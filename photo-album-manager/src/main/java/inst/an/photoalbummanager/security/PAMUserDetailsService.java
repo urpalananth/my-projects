@@ -1,4 +1,4 @@
-package in.inst.photoalbummanager.security;
+package inst.an.photoalbummanager.security;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import in.inst.photoalbummanager.beans.User;
-import in.inst.photoalbummanager.repo.UserRepository;
+import inst.an.photoalbummanager.beans.User;
+import inst.an.photoalbummanager.repo.UserRepository;
 
 @Transactional
 public class PAMUserDetailsService implements UserDetailsService {

@@ -1,4 +1,4 @@
-package in.inst.photoalbummanager.controller;
+package inst.an.photoalbummanager.controller;
 
 import java.net.URI;
 
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import in.inst.photoalbummanager.beans.Album;
-import in.inst.photoalbummanager.beans.Photo;
-import in.inst.photoalbummanager.repo.AlbumRepository;
-import in.inst.photoalbummanager.repo.PhotoRepository;
-import in.inst.photoalbummanager.repo.UserRepository;
+import inst.an.photoalbummanager.beans.Album;
+import inst.an.photoalbummanager.beans.Photo;
+import inst.an.photoalbummanager.repo.AlbumRepository;
+import inst.an.photoalbummanager.repo.PhotoRepository;
+import inst.an.photoalbummanager.repo.UserRepository;
 
 @RestController
 @RequestMapping("/{albumId}/photos")

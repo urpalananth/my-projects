@@ -1,8 +1,8 @@
-package in.inst.photoalbummanager.repo;
+package inst.an.photoalbummanager.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import in.inst.photoalbummanager.beans.User;
+import inst.an.photoalbummanager.beans.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
 

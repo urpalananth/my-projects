@@ -1,4 +1,4 @@
-package in.inst.photoalbummanager.beans;
+package inst.an.photoalbummanager.beans;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

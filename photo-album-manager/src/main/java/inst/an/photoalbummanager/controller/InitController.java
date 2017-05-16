@@ -1,4 +1,4 @@
-package in.inst.photoalbummanager.controller;
+package inst.an.photoalbummanager.controller;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 
-import in.inst.photoalbummanager.beans.Album;
-import in.inst.photoalbummanager.beans.AlbumData;
-import in.inst.photoalbummanager.beans.Photo;
-import in.inst.photoalbummanager.beans.PhotoData;
-import in.inst.photoalbummanager.repo.AlbumRepository;
-import in.inst.photoalbummanager.repo.PhotoRepository;
+import inst.an.photoalbummanager.beans.Album;
+import inst.an.photoalbummanager.beans.AlbumData;
+import inst.an.photoalbummanager.beans.Photo;
+import inst.an.photoalbummanager.beans.PhotoData;
+import inst.an.photoalbummanager.repo.AlbumRepository;
+import inst.an.photoalbummanager.repo.PhotoRepository;
 
 @Controller
 @RequestMapping("/init")
@@ -45,11 +45,11 @@ public class InitController {
 		RestTemplate restTemplate = new RestTemplate();
 		
 		try {
-			ResponseEntity<AlbumData[]> response = restTemplate.getForEntity(BASE_URL + "albums", AlbumData[].class);
-			ResponseEntity<PhotoData[]> response2 = restTemplate.getForEntity(BASE_URL + "photos", PhotoData[].class);
+			ResponseEntity<AlbumData[]> albums = restTemplate.getForEntity(BASE_URL + "albums", AlbumData[].class);
+			ResponseEntity<PhotoData[]> photos = restTemplate.getForEntity(BASE_URL + "photos", PhotoData[].class);
 
-			List<AlbumData> albumList = Arrays.asList(response.getBody());
-			List<PhotoData> photoList = Arrays.asList(response2.getBody());
+			List<AlbumData> albumList = Arrays.asList(albums.getBody());
+			List<PhotoData> photoList = Arrays.asList(photos.getBody());
 
 			System.out.println("--> " + albumList.size());
 			System.out.println("--> " + photoList.size());
@@ -68,16 +68,6 @@ public class InitController {
 									.collect(Collectors.toList());
 					
 			this.photoRepo.save(pList);
-			/*aList.forEach(a -> a.setPhotos(photoList.stream()
-													.filter(b -> b.getAlbumId().equals(a.getId()))
-													.map(c -> new Photo(c.getId(), c.getTitle(), c.getUrl(), c.getThumbnailUrl(), a))
-													.collect(Collectors.toSet())));
-			List<Album> aList = albumList
-					.stream().map(
-							a -> new Album(a.getUserId(), a.getId(),
-									a.getTitle(), photoList.stream().filter(b -> b.getAlbumId() == a.getId())
-											.map(c -> new Photo(c.getId(), c.getTitle(), c.getUrl(), c.getThumbnailUrl(), null)).collect(Collectors.toSet())))
-					.collect(Collectors.toList());*/
 			
 		} catch (Exception e) {
 			e.printStackTrace();
