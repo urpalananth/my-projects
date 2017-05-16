@@ -25,24 +25,27 @@ The application should be up and running on http://localhost:8080/
 
 credentials to login - any of the below
 
-user id	user name	password
-1	aa	aa
-2	ab	ab
-3	ac	ac
-4	ad	ad
-5	ae	ae
-6	af	af
-7	ag	ag
-8	ah	ah
-9	ai	ai
-10	aj	aj
-11	admin	admin
+|user id|user name	|password|
+|-------|-----------|--------|
+|1	| aa	| aa	|
+|2	| ab	| ab	|
+|3	| ac	| ac	|
+|4	| ad	| ad	|
+|5	| ae	| ae	|
+|6	| af	| af	|
+|7	| ag	| ag	|
+|8	| ah	| ah	|
+|9	| ai	| ai	|
+|10	| aj	| aj	|
+|11	| admin	| admin	|
 
 #Rest Endpoints - 
 
-http://localhost:8080/albums	(with methods GET, POST, PUT, DELETE)
-http://localhost:8080/photos	(with methods GET, POST, PUT, DELETE)
-http://localhost:8080/init		(to initialize data)
-http://localhost:8080/all		(for admin to get all the albums)
+|Endpoint|Comments|
+|----|----|
+|http://localhost:8080/albums	|(with methods GET, POST, PUT, DELETE)|
+|http://localhost:8080/photos	|(with methods GET, POST, PUT, DELETE)|
+|http://localhost:8080/init		|(to initialize data)|
+|http://localhost:8080/all		|(for admin to get all the albums)|
 
 
