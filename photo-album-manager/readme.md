@@ -13,7 +13,7 @@ cd <download location>my-projects/photo-album-manager
   
 The application should be up and running on http://localhost:8080/
 
-**Build and run command line ** 
+**Build and run command line** 
 
 cd <download location>my-projects/photo-album-manager
 
@@ -21,7 +21,7 @@ cd <download location>my-projects/photo-album-manager
 
 The application should be up and running on http://localhost:8080/
 
-**User Interface **
+**User Interface**
 
 credentials to login - any of the below
 
@@ -39,7 +39,7 @@ credentials to login - any of the below
 |10	| aj	| aj	|
 |11	| admin	| admin	|
 
-**Rest Endpoints **
+**Rest Endpoints**
 
 |Endpoint|Comments|
 |----|----|
