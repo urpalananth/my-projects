@@ -1,18 +1,19 @@
 **Code Challenge (REST): Photo Album Manager**
+
 Create a simple Photo Album manager. The manager should implement a REST
 API. Authentication is not necessary, but be prepared to discuss how you would add it.
 
 The REST API should support the following functionality:
 
-• Standard CRUD operations for albums,and photos.
-• Add a photo to an existing album
-• Remove a photo from an existing album
-• Return a list of all albums, with the photos associated with those albums.
-• Return a list of photos given an album id.
+ - Standard CRUD operations for albums,and photos.
+ - Add a photo to an existing album
+ - Remove a photo from an existing album
+ - Return a list of all albums, with the photos associated with those albums.
+ - Return a list of photos given an album id.
   	The relationship between these should be:
-		• Each photo is associated with an album (photo.albumId associated with album.id).
+		- Each photo is associated with an album (photo.albumId associated with album.id).
 	The following constraint should be implemented:
-		• Albums cannot be deleted if any associated photos exist.
+		- Albums cannot be deleted if any associated photos exist.
 	Albums and photos should have the following attributes
 |Albums|
 |----|
