@@ -23,7 +23,7 @@ import inst.an.photoalbummanager.repo.UserRepository;
 @RestController
 @RequestMapping("/{albumId}/photos")
 public class PhotoContoller {
-	private static final Logger LOGGER = Logger.getLogger("PAMUserDetailsService");
+	private static final Logger LOGGER = Logger.getLogger("PhotoContoller");
 	private PhotoRepository photoRepo;
 	private AlbumRepository albumRepo;
 	private UserRepository userRepo;
